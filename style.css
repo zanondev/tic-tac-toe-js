@@ -1,0 +1,152 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  height: 100vh; /*ocupar 100% da largura*/
+  width: 100vh;
+  background: #a3c7f7;
+  /* #321B5F */
+}
+
+.board {
+  display: grid;
+  margin: 20% 108%;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(3, auto);
+}
+
+.board.x .cell:not(.x):not(.circle):hover::after, /* hover na .board.x (jogador da vez) e não(not()) nas cell.x, cell.circle x (celulas ja ocupadas)*/
+.board.x .cell:not(.x):not(.circle):hover::before {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.board.circle .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+  border: 10px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+/* menssagem de vitória */
+.winning-message {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  flex-direction: column;
+}
+
+.winning-message-button {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5rem;
+  background-color: #a3c7f7;
+  padding: 10px 15px;
+  cursor: ponter;
+  border-radius: 5px;
+  border: none;
+  margin-top: 16px;
+  color: black;
+  font-weight: bolder;
+}
+
+.winning-message-button:hover {
+  color: #a3c7f7;
+  background-color: black;
+}
+.winning-message-text {
+  font-weight: bolder;
+  font-family: "Montserrat", sans-serif;
+  color: #a3c7f7;
+  font-size: 5rem;
+}
+
+/* celulas */
+.cell {
+  width: 200px;
+  height: 150px;
+  border: 4px solid #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.cell.x,
+.cell.circle {
+  cursor: not-allowed;
+}
+
+.cell:nth-child(1),
+.cell:nth-child(2),
+.cell:nth-child(3) {
+  border-top: none;
+}
+
+.cell:nth-child(1),
+.cell:nth-child(4),
+.cell:nth-child(7) {
+  border-left: none;
+}
+
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9) {
+  border-bottom: none;
+}
+
+.cell:nth-child(3),
+.cell:nth-child(6),
+.cell:nth-child(9) {
+  border-right: none;
+}
+
+/* x */
+.cell.x::before, 
+.cell.x::after, 
+.board.x .cell:not(.x):not(.circle):hover::after, /* hover na .board.x (jogador da vez) e não(not()) nas cell.x, cell.circle x (celulas ja ocupadas)*/
+.board.x .cell:not(.x):not(.circle):hover::before {
+  content: "";
+  width: 100px;
+  height: 10px;
+  background-color: #fff;
+  position: absolute;
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before {
+  transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after {
+  transform: rotate(-45deg);
+}
+
+/* circle */
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+  content: "";
+  width: 100px;
+  height: 100px;
+  background-color: transparent;
+  position: absolute;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 10px solid #fff;
+}
+
+.show-winning-message{
+  display: flex;
+}
